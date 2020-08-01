@@ -18,12 +18,16 @@ from django.urls import path, include
 from testapp import views as testview
 from rest_framework import routers
 from rest_framework.authtoken import views
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 router = routers.DefaultRouter()
 router.register('api', testview.EmployeeCRUDCBV, basename='api')
-
+ 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('get-api-token/', views.obtain_auth_token, name = 'get-api-token'),
+    path('auth-jwt/', obtain_jwt_token),
+    path('auth-jwt-referesh/', refresh_jwt_token),
+    path('auth-jwt-verify/', verify_jwt_token),
 ]
